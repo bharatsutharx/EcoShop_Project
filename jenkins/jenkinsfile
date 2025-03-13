@@ -1,0 +1,40 @@
+pipeline {
+    agent any  
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('docker-hub')  
+        IMAGE_NAME = "bharat5/ecoshop"      
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git 'https://github.com/bharatsutharx/EcoShop_Project.git' 
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh "docker build -t $IMAGE_NAME:latest ."
+                }
+            }
+        }
+
+        stage('Push Image to Docker Hub') {
+            steps {
+                script {
+                    sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+                    sh "docker push $IMAGE_NAME:latest"
+                }
+            }
+        }
+       
+    }
+
+    post {
+        always {
+            echo "Pipeline execution completed!"
+        }
+    }
+}
