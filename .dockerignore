@@ -1,0 +1,45 @@
+# Node.js dependencies
+node_modules/
+
+
+# Logs
+*.log
+
+# Build outputs
+dist/
+
+# IDE files
+.idea/
+.vscode/
+
+# Version control
+.git/
+
+# Temporary files
+*.tmp
+
+# Documentation
+*.md
+
+# Docker files
+Dockerfile*
+
+# Specific exclusions
+.bolt/
+
+# Exclude all files by default
+**/*
+
+# Include necessary files
+!src/**
+!package.json
+!package-lock.json
+!vite.config.ts
+!tsconfig.json
+!tsconfig.app.json
+!tsconfig.node.json
+!tailwind.config.js
+!postcss.config.js
+!eslint.config.js
+!index.html
+!.env 
