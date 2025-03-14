@@ -12,6 +12,8 @@ Vite React App (Frontend)
 Supabase (Database)
 ```
 
+<img src="docs/EcoShop-ezgif.com-crop.gif" width="600">
+
 ### 🖥️ Frontend (React + Vite)
 - **Vite**: Used for fast builds.
 - **React**: Manages UI components.
@@ -21,19 +23,15 @@ Supabase (Database)
 ### 🔗 Backend (Supabase)
 Supabase acts as a backend replacement:
 - **Database**: PostgreSQL
-- **Authentication**: OAuth, JWT
 - **API access**: Managed via Supabase
 
 ### 🛠️ DevOps Stack
 - **Containerization**: Docker
-- **Orchestration**: Kubernetes (Minikube for local testing, EKS/GKE for cloud)
+- **Orchestration**: Kubernetes (Minikube for local testing)
 - **CI/CD**: Jenkins (Phase 1), GitHub Actions + ArgoCD (Phase 2)
-- **Infrastructure as Code**: Terraform
-- **Monitoring**: Prometheus, Grafana, Loki, Alertmanager
-- **Cloud Provider**: AWS/GCP (EKS/GKE, S3, RDS, Route 53, etc.)
+- **Monitoring**: Prometheus, Grafana,  Alertmanager
 
 ## DevOps implementation 
-
 
 ###  Containerization (Docker) : Build a lightweight, production-ready Docker image.
 
@@ -43,7 +41,7 @@ Supabase acts as a backend replacement:
 
 ---
 
-###  CI/CD Pipeline: GitHub Actions + ArgoCD
+###  CI/CD Pipeline: GitHub Actions + ArgoCD 
 
 Automate testing, building, and deploying the app
 
@@ -65,14 +63,20 @@ Steps:
 
 * Create Deployment, Service, Ingress YAML files
 * Expose the app using Nginx Ingress Controller
----
 
-###  Infrastructure as Code (Terraform)
- Automate cloud infrastructure setup (AWS/GCP).
+**I deployed kubernetes manifests and using argocd in minikube**
 
-- Provision **EKS/GKE cluster**
-- Set up **networking** (VPC, subnets, security groups)
-- Create an **Elastic Load Balancer (ELB)**
+## Flow (How ArgoCD Deploys Your App in minikube) - 
+
+*  I push the Kubernetes YAML files to GitHub inside the k8s/ folder.
+
+* ArgoCD watches the repo and detects changes automatically.
+
+*  ArgoCD pulls the latest manifests and applies them to Minikube.
+
+*  Application is deployed inside Minikube just like running kubectl apply -f k8s/ but fully automated.
+
+<img src="docs/ArgoCD.png" width="600">
 
 ---
 
@@ -84,6 +88,6 @@ Set up end-to-end observability for the application.
 - **Loki + Grafana** for logs
 - **Alerting** via Alertmanager + Slack/Email
 
----
+<img src="docs/Grafana.png" width="600">
 
 ---
