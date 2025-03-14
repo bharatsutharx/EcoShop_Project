@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecoshop
+  namespace: ecoshop
+  labels:
+    app: ecoshop
+spec:
+  replicas: 1  
+  selector:
+    matchLabels:
+      app: ecoshop
+  template:
+    metadata:
+      labels:
+        app: ecoshop
+    spec:
+      containers:
+        - name: ecoshop
+          image: bharat5/ecoshop:latest
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: ecoshop-config
